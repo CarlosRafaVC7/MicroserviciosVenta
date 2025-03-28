@@ -14,26 +14,22 @@ public class ClienteController {
 	@Autowired
     private ClienteRepository clienteRepository;
 
-    // 1. Listar todos los clientes
     @GetMapping
     public List<Cliente> listarClientes() {
         return clienteRepository.findAll();
     }
 
-    // 2. Obtener un cliente por ID
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> obtenerClientePorId(@PathVariable Long id) {
         Optional<Cliente> cliente = clienteRepository.findById(id);
         return cliente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // 3. Crear un nuevo cliente
     @PostMapping
     public Cliente crearCliente(@RequestBody Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
-    // 4. Actualizar un cliente existente
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> actualizarCliente(@PathVariable Long id, @RequestBody Cliente clienteActualizado) {
         return clienteRepository.findById(id)
@@ -47,7 +43,6 @@ public class ClienteController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // 5. Eliminar un cliente
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarCliente(@PathVariable Long id) {
         return clienteRepository.findById(id)

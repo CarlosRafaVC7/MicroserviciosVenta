@@ -21,13 +21,11 @@ public class DireccionClienteController {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    // 1. Listar todas las direcciones de un cliente
     @GetMapping
     public List<DireccionCliente> listarDirecciones(@PathVariable Long clienteId) {
         return direccionRepository.findByClienteId(clienteId);
     }
 
-    // 2. Crear una nueva dirección para un cliente
     @PostMapping
     public ResponseEntity<DireccionCliente> crearDireccion(
             @PathVariable Long clienteId,
@@ -42,7 +40,6 @@ public class DireccionClienteController {
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + clienteId));
     }
 
-    // 3. Actualizar una dirección existente
     @PutMapping("/{direccionId}")
     public ResponseEntity<DireccionCliente> actualizarDireccion(
             @PathVariable Long clienteId,
@@ -64,7 +61,6 @@ public class DireccionClienteController {
                 .orElseThrow(() -> new RuntimeException("Dirección no encontrada con ID: " + direccionId));
     }
 
- // 4. Eliminar una dirección
     @DeleteMapping("/{direccionId}")
     public ResponseEntity<Void> eliminarDireccion(
             @PathVariable Long clienteId,
